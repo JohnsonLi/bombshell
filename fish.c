@@ -4,6 +4,7 @@
 #include <unistd.h>
 #include <fcntl.h>
 #include <errno.h>
+#include <sys/wait.h>
 
 char **parse_args(char *input){
 	char **args = malloc(1024 * sizeof(char *));
@@ -31,13 +32,16 @@ int main(int argc, char const *argv[]){
 
 		args[strlen(args) - 1] = 0;
 		char **args_parsed = parse_args(args);
-		printf("%s %s\n", args_parsed[0], args_parsed[1]);
+		// printf("%s %s\n", args_parsed[0], args_parsed[1]);
 
 		int a = fork();
 		if(!a){
 			execvp(args_parsed[0], args_parsed);
 			return 0;
 		}
+
+		int p, status;
+		p = wait(&status);
 	}
 
 }
