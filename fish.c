@@ -28,17 +28,16 @@ int main(int argc, char const *argv[]){
 		fflush(stdout);
 
 		fgets(args, sizeof(args), stdin);
-		// read(STDIN_FILENO, args, 1000);
+
 		args[strlen(args) - 1] = 0;
 		char **args_parsed = parse_args(args);
 		printf("%s %s\n", args_parsed[0], args_parsed[1]);
-		// printf("%ld\n", sizeof(args_parsed));
-		// int i;
-		// for(i = 0; i < sizeof(args_parsed); i++){
-		// 	printf("%s\n", args_parsed[i]);
-		// }
 
-		execvp(args_parsed[0], args_parsed);
+		int a = fork();
+		if(!a){
+			execvp(args_parsed[0], args_parsed);
+			return 0;
+		}
 	}
 
 }
