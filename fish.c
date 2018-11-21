@@ -18,22 +18,16 @@ char **parse_args(char *input){
 	return args;
 }
 
+int run_commands(char ** args_parsed){
+	if(strcmp(args_parsed[0],"exit") == 0){
+		exit(0);
+	}
 
-int main(int argc, char const *argv[]){
-	printf("==========SHELLFISH==========\n");
-
-	char *args = malloc(1024 * sizeof(args));
-	while(1){
-		// printf("\n");
-		printf("shellfish>$>$>$>$@@@ ");
-		fflush(stdout);
-
-		fgets(args, sizeof(args), stdin);
-
-		args[strlen(args) - 1] = 0;
-		char **args_parsed = parse_args(args);
-		// printf("%s %s\n", args_parsed[0], args_parsed[1]);
-
+	if(strcmp(args_parsed[0], "cd") == 0){
+		if(chdir(args_parsed[1]) == -1){
+			printf("Bombshell: cd: %s: No such file or directory\n", args_parsed[1]);
+		}
+	} else {
 		int a = fork();
 		if(!a){
 			execvp(args_parsed[0], args_parsed);
@@ -42,6 +36,36 @@ int main(int argc, char const *argv[]){
 
 		int p, status;
 		p = wait(&status);
+	}
+}
+
+int run(char *input){
+	char **args = malloc(1024 * sizeof(char *));
+
+	int counter = 0;
+	while(input){
+        args[counter] = strsep(&input, ";");
+		run_commands(parse_args(args[counter]));
+        counter++;
+	}
+}
+
+int main(int argc, char const *argv[]){
+	printf("==========BOMBSHELL==========\n");
+
+	char *args = malloc(1024 * sizeof(args));
+	while(1){
+		// printf("\n");
+		printf("bombshell>$>$>$>$@@@ ");
+		fflush(stdout);
+
+		fgets(args, 1023, stdin);
+		// printf("%s\n", args);
+
+		args[strlen(args) - 1] = 0;
+		// char **args_parsed = parse_args(args);
+		// printf("%s %s %s\n", args_parsed[0], args_parsed[1], args_parsed[2]);
+		run(args);
 	}
 
 }
