@@ -52,19 +52,19 @@ int run(char *input){
 
 int main(int argc, char const *argv[]){
 	printf("==========BOMBSHELL==========\n");
-	printf("	         \\|/\n");
-	printf("	        .-*-\n");
-	printf("	       / /|\\\n");
-	printf("	      _L_\n");
-	printf("	    ,\"   \".\n");
-	printf("	(\\ /  O O  \\ /)\n");
-	printf("	 \\|    _    |/\n");
-	printf("	   \\  (_)  /\n");
-	printf("	   _/.___,\\_\n");
-	printf("	  (_/     \\_)\n");
+	printf("	         \\|/\n"			);
+	printf("	        .-*-\n"				);
+	printf("	       / /|\\\n"			);
+	printf("	      _L_\n"				);
+	printf("	    ,\"   \".\n"			);
+	printf("	(\\ /  O O  \\ /)\n"		);
+	printf("	 \\|    _    |/\n"			);
+	printf("	   \\  (_)  /\n"			);
+	printf("	   _/.___,\\_\n"			);
+	printf("	  (_/     \\_)\n"			);
 	printf("\n");
 
-	
+
 
 
 
