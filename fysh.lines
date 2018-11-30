@@ -1,3 +1,0 @@
-ls
-gcc fish.c
-./a.out
