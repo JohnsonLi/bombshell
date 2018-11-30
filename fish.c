@@ -5,6 +5,7 @@
 #include <fcntl.h>
 #include <errno.h>
 #include <sys/wait.h>
+#include "pipe.h"
 
 char **parse_args(char *input){
 	char **args = malloc(1024 * sizeof(char *));
@@ -28,9 +29,33 @@ int run_commands(char ** args_parsed){
 			printf("Bombshell: cd: %s: No such file or directory\n", args_parsed[1]);
 		}
 	} else {
+
+		char **second = malloc(1024 * sizeof(char *));
+
+		int i;
+		int j;
+		int pipe_index = 0;
+		int size = sizeof(args_parsed);
+		for(i = 0; i < size; i++){
+			printf("%s\n", args_parsed[i]);
+			if(strchr(args_parsed[i], '|')){
+				pipe_index = i;
+				args_parsed[i] = NULL;
+				for(j = i + 1; j < size; j++){
+					args_parsed[j] = second[j-i-1];
+				}
+			}
+		}
+
 		int a = fork();
 		if(!a){
+
+			if (pipe_index){
+				piping(args_parsed, second);
+				return 0;
+			}
 			execvp(args_parsed[0], args_parsed);
+
 			return 0;
 		}
 
@@ -38,6 +63,8 @@ int run_commands(char ** args_parsed){
 		p = wait(&status);
 	}
 }
+
+
 
 int run(char *input){
 	char **args = malloc(1024 * sizeof(char *));
