@@ -12,8 +12,8 @@ char **parse_args(char *input){
 
 	int counter = 0;
 	while(input){
-        args[counter] = strsep(&input, " ");
-        counter++;
+		args[counter] = strsep(&input, " ");
+		counter++;
 	}
 
 	return args;
@@ -30,30 +30,30 @@ int run_commands(char ** args_parsed){
 		}
 	} else {
 
-		char **second = malloc(1024 * sizeof(char *));
+		// char **second = malloc(1024 * sizeof(char *));
 
-		int i;
-		int j;
-		int pipe_index = 0;
-		int size = sizeof(args_parsed);
-		for(i = 0; i < size; i++){
-			printf("%s\n", args_parsed[i]);
-			if(strchr(args_parsed[i], '|')){
-				pipe_index = i;
-				args_parsed[i] = NULL;
-				for(j = i + 1; j < size; j++){
-					args_parsed[j] = second[j-i-1];
-				}
-			}
-		}
+		// int i;
+		// int j;
+		// int pipe_index = 0;
+		// int size = sizeof(args_parsed);
+		// for(i = 0; i < size; i++){
+		// 	printf("%s\n", args_parsed[i]);
+		// 	if(strchr(args_parsed[i], '|')){
+		// 		pipe_index = i;
+		// 		args_parsed[i] = NULL;
+		// 		for(j = i + 1; j < size; j++){
+		// 			args_parsed[j] = second[j-i-1];
+		// 		}
+		// 	}
+		// }
 
 		int a = fork();
 		if(!a){
 
-			if (pipe_index){
-				piping(args_parsed, second);
-				return 0;
-			}
+			// if (pipe_index){
+			// 	piping(args_parsed, second);
+			// 	return 0;
+			// }
 			execvp(args_parsed[0], args_parsed);
 
 			return 0;
@@ -68,12 +68,26 @@ int run_commands(char ** args_parsed){
 
 int run(char *input){
 	char **args = malloc(1024 * sizeof(char *));
+	char* output = malloc(10000);
+	char buf[9999];
+	char* pipe_index = strchr(input, '|');
+	if (pipe_index){
+		char* first = input;
+		pipe_index[0] = 0;
+		char* second = &pipe_index[1];
+		printf("first %s\n", first);
+		printf("second %s\n", second);
+		FILE *pipein = popen(first,"r");
+		FILE *pipeout = popen(second, "w");
+		fgets(buf, 9999, pipein);
+		printf("hi\n");
+	}
 
 	int counter = 0;
 	while(input){
-        args[counter] = strsep(&input, ";");
+		args[counter] = strsep(&input, ";");
 		run_commands(parse_args(args[counter]));
-        counter++;
+		counter++;
 	}
 }
 
