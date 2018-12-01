@@ -80,6 +80,7 @@ int run(char *input){
 		FILE *pipein = popen(first,"r");
 		FILE *pipeout = popen(second, "w");
 		fgets(buf, 9999, pipein);
+		fputs(buf, pipeout);
 		printf("hi\n");
 	}
 
