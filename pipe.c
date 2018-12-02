@@ -9,7 +9,7 @@
 
 #define PIPE_READ 0
 #define PIPE_WRITE 1
-
+/*
 int pipes(char *input){
     printf("GONNA PIPE\n");
     
@@ -72,8 +72,9 @@ fflush(stdout);
 free(pipees);
 
 }
+*/
 
-int pipes2(char* input){
+void pipes2(char* input){
     char **pipees = malloc(1024 * sizeof(char *));
     char *buf = malloc(1024*sizeof(char*));
     FILE *temp;

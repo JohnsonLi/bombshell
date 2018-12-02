@@ -76,12 +76,19 @@ int run(char *input){
     free(args);
 }
 
+static void sighandler(int signo){
+	char dir[100];
+	getcwd(dir, sizeof(dir));
+    printf("\nBombshell: %s $ ", dir);
+	fflush(stdout);
+}
+
 int main(){
 
     char *input = malloc(1024 * sizeof(input));
 
     while(1){
-
+    	signal(SIGINT, sighandler);
         char dir[100];
         getcwd(dir, sizeof(dir));
 

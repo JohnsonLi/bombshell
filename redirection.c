@@ -8,7 +8,7 @@
 #include <signal.h>
 #include "shell.h"
 
-int redirect(char *input){
+void redirect(char *input){
     printf("HANDLING REDIRECT!!\n");
 
     char **redirectees = malloc(1024 * sizeof(char *));
@@ -52,7 +52,7 @@ int redirect(char *input){
 
         if(file < 0){
             printf("File does not exist!\n");
-            return 0;
+            return ;
         }
 
         dup2(file, STDIN_FILENO);
@@ -63,9 +63,4 @@ int redirect(char *input){
         
         free(redirectees);
     }
-
-    
-
-
-
 }
