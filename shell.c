@@ -32,7 +32,7 @@ int run_commands(char *input){
 
     if(strchr(input, '|')){
         printf("PIPING\n");
-        pipes(input);
+        pipes2(input);
         return 0;
     }
 
