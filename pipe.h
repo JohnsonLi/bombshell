@@ -1,1 +1,1 @@
-void piping(char **first, char**second);
+int pipes(char *input);
