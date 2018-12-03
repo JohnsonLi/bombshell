@@ -55,10 +55,11 @@ int run_commands(char *input){
     if(!a){
         execvp(parsed_args[0], parsed_args);
     }
-    int p, status;
-    p = wait(&status);
-
-    free(parsed_args);
+    else{
+    	int p, status;
+    	p = wait(&status);
+    	free(parsed_args);	
+    }
     return 0;
 }
 
