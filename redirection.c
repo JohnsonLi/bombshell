@@ -41,6 +41,7 @@ void redirect(char *input){
 
         dup2(temp_stdout, STDOUT_FILENO);
 
+        close(file);
         free(redirectees);
     }
 
@@ -61,6 +62,7 @@ void redirect(char *input){
 
         dup2(temp_stdin, STDIN_FILENO);
 
+        close(file);
         free(redirectees);
     }
 }
