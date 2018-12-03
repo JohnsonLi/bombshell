@@ -84,14 +84,20 @@ void pipes2(char *input){
     int p[2];
     pipe(p);
     int pid = fork();
-    if (pid  != 0) {
-        dup2(p[1], PIPE_WRITE);
-        close(p[0]);
-        execvp(first_parsed[0], first_parsed);
+    if (pid) {
+        // int pid2 = fork();
+        // if (!pid2){
+            dup2(p[1], PIPE_WRITE);
+            close(p[0]);
+            execvp(first_parsed[0], first_parsed);
+        // }
     } 
     else {
-        dup2(p[0], PIPE_READ);
-        close(p[1]);
-        execvp(second_parsed[0], second_parsed);
+        // int pid2 = fork();
+        // if (!pid2){
+            dup2(p[0], PIPE_READ);
+            close(p[1]);
+            execvp(second_parsed[0], second_parsed);
+        // }
     }
 }
