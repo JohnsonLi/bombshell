@@ -17,11 +17,11 @@ void redirect(char *input){
 
 
     int counter = 0;
-	while(input){
+	  while(input){
         if(strchr(input, '>')){
-		    redirectees[counter] = strsep(&input, ">");
+		        redirectees[counter] = strsep(&input, ">");
         } else {
-		    redirectees[counter] = strsep(&input, "<");
+		        redirectees[counter] = strsep(&input, "<");
         }
 		counter++;
 	}
@@ -31,7 +31,7 @@ void redirect(char *input){
 
     if(strchr(cpy, '>')){
         printf("REDIRECTING NOW>>>!!!\n");
-        int temp_stdout = dup(STDOUT_FILENO);  
+        int temp_stdout = dup(STDOUT_FILENO);
 
         int file = open(redirectees[1], O_CREAT | O_WRONLY, 0644);
 
@@ -43,10 +43,10 @@ void redirect(char *input){
 
         free(redirectees);
     }
-    
+
     if(strchr(cpy, '<')){
         printf("REDIRECTING NOW<<<!!!\n");
-        int temp_stdin = dup(STDIN_FILENO);  
+        int temp_stdin = dup(STDIN_FILENO);
 
         int file = open(redirectees[1], O_RDONLY, 0644);
 
@@ -60,7 +60,7 @@ void redirect(char *input){
         run_commands(redirectees[0]);
 
         dup2(temp_stdin, STDIN_FILENO);
-        
+
         free(redirectees);
     }
 }
