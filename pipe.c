@@ -12,7 +12,7 @@
 
 int pipes(char *input){
     printf("GONNA PIPE\n");
-    
+
     char **pipees = malloc(1024 * sizeof(char *));
 
     int counter = 0;
@@ -58,7 +58,7 @@ int pipes(char *input){
         dup2(temp_stdin, STDIN_FILENO);
 
         return 0;
-    } 
+    }
 }
 
 int s, b;
@@ -82,8 +82,8 @@ void pipes2(char *input){
     parse_args(first,first_parsed);
     parse_args(second,second_parsed);
     int p[2];
-    pipe(p);
     int pid0 = fork();
+    pipe(p);
     if (!pid0){
         int pid = fork();
         if (!pid) {
@@ -93,7 +93,7 @@ void pipes2(char *input){
             close(p[0]);
             execvp(first_parsed[0], first_parsed);
         // }
-        } 
+        }
         else {
         // int pid2 = fork();
         // if (!pid2){

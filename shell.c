@@ -38,7 +38,7 @@ int run_commands(char *input){
 
     char **parsed_args = malloc(1024 * sizeof(char *));
     parse_args(input, parsed_args);
-    
+
     if(strcmp(parsed_args[0],"exit") == 0){
 		exit(0);
 	}
@@ -58,7 +58,7 @@ int run_commands(char *input){
     else{
     	int p, status;
     	p = wait(&status);
-    	free(parsed_args);	
+    	free(parsed_args);
     }
     return 0;
 }
