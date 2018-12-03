@@ -62,7 +62,7 @@ int run_commands(char *input){
     return 0;
 }
 
-int run(char *input){
+void run(char *input){
     char **args = malloc(1024 * sizeof(char *));
 
     int counter = 0;

@@ -8,8 +8,7 @@ Features:
 	Single Pipe
 
 Attempted:
-	Redirects using <<,>>
-	Piping without popen()
+	The following did not end up working, but have been left in the code, commented out.
 
 Bugs:
 	Shell breaks after running a pipe command
@@ -26,27 +25,41 @@ shell.c
 	====================*/
 
 	/*======== char **parse_args(char *input, char **buffer) ==========
-	Inputs:  char *line 
-	Returns: Array of strings where each entry is a token 
-	separated by delim
+	Inputs:  char *input, char **buffer
+	Returns: A pointer to a two array of the command
 
-	If line contains multiple tokens separated by delim, this 
-	function will put each token into an array of strings
+	Separates the input by spaces and returns a pointer to the 2D array
 	====================*/
 
-redirection.c
-	Handles the redirection commands
-	/*======== void redirect(char *input) ==========
+	/*======== int run_commands(char *input) ==========
+	Inputs:  char *input
+	Returns: 0
+
+	Runs the command and runs other functions depending on if it has a redirect or pipe
+	====================*/
+
+	/*======== void run(char *input) ==========
 	Inputs:  char *input
 	Returns: void
+
+	Separates the input at semicolons and runs the individual commands
+	====================*/
+
+pipe.c
+	Runs the pipe commands
+	/*======== void pipes2(char* input) ==========
+	Inputs:  char* input
+	Returns: void
 	
-	Run redirection command
+	Runs the pipe commands
 	====================*/
 pipe.c
-	Handles the pipe commands
+	Runs the pipe commands
 	/*======== void pipes2(char* input) ==========
-	Inputs:  char *input
+	Inputs:  char* input
 	Returns: void
 	
-	Run pipe command with popen()
+	Runs the pipe commands
 	====================*/
+magical.c
+UNOCORNS! 
