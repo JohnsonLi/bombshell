@@ -20,7 +20,7 @@ char **parse_args(char *input, char **buffer){
 }
 
 int run_commands(char *input){
-    if(strchr(input, '>') || strchr(input, '<')){
+    if(strchr(input, '>') || strchr(input, '<') || strstr(input, ">>")){
         int a = fork();
         if(!a){
             redirect(input);
@@ -54,6 +54,7 @@ int run_commands(char *input){
     int a = fork();
     if(!a){
         execvp(parsed_args[0], parsed_args);
+        fflush(stdout);
     }
     else{
     	int p, status;

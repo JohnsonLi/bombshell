@@ -1,1 +1,1 @@
-void redirect(char *input);
+int redirect(char *input);
