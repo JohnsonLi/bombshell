@@ -1,11 +1,11 @@
-Bombshell
-by Johnson Li and Anthony Lam
+# Bombshell  
+### by Johnson Li and Anthony Lam
 
-Features:
-	Forks and executes commands
-	Parses multiple commands on one line
-	Redirects using >, <
-	Single Pipe
+## Features:
+	- Forks and executes commands
+	- Parses multiple commands on one line
+	- Redirects using >, <
+	- Single Pipe
 
 Attempted:
 	The following did not end up working, but have been left in the code, commented out.
